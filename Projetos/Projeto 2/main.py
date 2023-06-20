@@ -3,8 +3,18 @@ import argparse
 
 from multiprocessing import Process
 
+def get_lines(sudoku):
+    return sudoku[:]
+
+def get_columns(sudoku):
+    return [[sudoku[]] for c in range(len(sudoku))]
+
 def work_process(sudokus):
     sudokus_blocks = [[] for _ in sudokus]
+    for i, sudoku in enumerate(sudokus):
+        sudokus_blocks[i].extend(get_lines(sudoku)).extend(get_columns).extend(get_regions)
+
+
 
 def work_threads(blocks):
     pass
