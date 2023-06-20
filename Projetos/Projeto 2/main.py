@@ -4,7 +4,10 @@ import argparse
 from multiprocessing import Process
 
 def work_process(sudokus):
-    print(sudokus)
+    sudokus_blocks = [[] for _ in sudokus]
+
+def work_threads(blocks):
+    pass
 
 def pos_int(value):
     pos_i = int(value)
