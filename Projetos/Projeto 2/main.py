@@ -7,13 +7,22 @@ def get_lines(sudoku):
     return sudoku[:]
 
 def get_columns(sudoku):
-    return [[sudoku[]] for c in range(len(sudoku))]
+    return [[sudoku[l][c] for l in range(len(sudoku))] for c in range(len(sudoku))]
+
+def get_regions(sudoku):
+    regions = [[] for _ in range((len(sudoku) // 3) * (len(sudoku) // 3))]
+    for r in range((len(sudoku) // 3) * (len(sudoku) // 3)):
+        for l in range((r // 3) * 3, (r // 3) * 3 + 3):
+            for c in range((r % 3) * 3, (r % 3) * 3 + 3):
+                regions[r].append(sudoku[l][c])
+    return regions[:]
 
 def work_process(sudokus):
     sudokus_blocks = [[] for _ in sudokus]
     for i, sudoku in enumerate(sudokus):
-        sudokus_blocks[i].extend(get_lines(sudoku)).extend(get_columns).extend(get_regions)
-
+        sudokus_blocks[i].extend(get_lines(sudoku))
+        sudokus_blocks[i].extend(get_columns(sudoku))
+        sudokus_blocks[i].extend(get_regions(sudoku))
 
 
 def work_threads(blocks):
